@@ -1,6 +1,6 @@
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { ClerkProvider } from '@clerk/clerk-react';
+import { ClerkProvider } from '@clerk/nextjs';
 import Header from '@/components/ui/header';
 
 const inter = Inter({
@@ -16,9 +16,7 @@ export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
       <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
+        <body className={` antialiased`}>
           <Header />
           <main className="min-h-screen">{children}</main>
           <footer className="bg-blue-50 py-12">
