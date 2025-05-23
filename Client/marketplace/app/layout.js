@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={` antialiased`}>
+        <body className={`${inter.className} bg-gray-50`}>
           <Header />
           <main className="min-h-screen">{children}</main>
           <footer className="bg-blue-50 py-12">
