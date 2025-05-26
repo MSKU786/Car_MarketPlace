@@ -7,15 +7,6 @@ import { Button } from './button';
 
 const Header = async ({ isAdminPage = false }) => {
   return (
-    // <div>
-    //   <SignedOut>
-    //     <SignInButton />
-    //     <SignUpButton />
-    //   </SignedOut>
-    //   <SignedIn>
-    //     <UserButton />
-    //   </SignedIn>
-    // </div>
     <header className="fixed top-0 w-full z-50 flex items-center justify-between bg-white/80 backdrop-blur-md p-4 shadow-md border-b">
       <nav className="mx-auto px-4 py-4 flex items-center justify-between">
         <Link href={isAdminPage ? '/admin' : '/'}>
@@ -28,32 +19,51 @@ const Header = async ({ isAdminPage = false }) => {
           />
         </Link>
         {isAdminPage && <span className="text-xs font-extralight">admin</span>}
-      </nav>
-      <div className="flex items-center gap-4">
+
+        <div className="flex items-center gap-4">
+          <SignedIn>
+            <Link href="/saved-cars">
+              <Button>
+                <CarFront size={18} />
+                <span className="hidden md:inline">Saved Cars</span>
+              </Button>
+            </Link>
+            {isAdminPage ? (
+              <Link href="/reserrvations">
+                <Button>
+                  <CarFront size={18} />
+                  <span className="hidden md:inline">My Reservations</span>
+                </Button>
+              </Link>
+            ) : (
+              <Link href="/admin">
+                <Button>
+                  <CarFront size={18} />
+                  <span className="hidden md:inline">Admin Portal</span>
+                </Button>
+              </Link>
+            )}
+          </SignedIn>
+        </div>
+
+        <SignedOut>
+          <SignInButton forceRedirectUrl="/">
+            <Button variant="outline">Login</Button>
+          </SignInButton>
+        </SignedOut>
+
         <SignedIn>
-          <Link href="/saved-cars">
-            <Button>
-              <CarFront size={18} />
-              <span className="hidden md:inline">Saved Cars</span>
-            </Button>
-          </Link>
-          {isAdminPage ? (
-            <Link href="/reserrvations">
-              <Button>
-                <CarFront size={18} />
-                <span className="hidden md:inline">My Reservations</span>
-              </Button>
-            </Link>
-          ) : (
-            <Link href="/admin">
-              <Button>
-                <CarFront size={18} />
-                <span className="hidden md:inline">Admin Portal</span>
-              </Button>
-            </Link>
-          )}
+          <UserButton
+            appearance={{
+              elements: {
+                userButtonAvatarBox: 'h-10 w-10',
+                userButtonAvatar: 'rounded-full',
+                userButtonProfile: 'hidden',
+              },
+            }}
+          />
         </SignedIn>
-      </div>
+      </nav>
     </header>
   );
 };
